@@ -1,0 +1,17 @@
+<launch>
+	<arg name="theta_param" value="2" />
+	<arg name="speed_param" value="5" />
+	<arg name="rate_param" value="12" />
+	
+	<node name="my_launch_turtle" pkg="turtlesim" type="turtlesim_node">
+	</node>
+
+	<node name="my_main_node" pkg="hw02kevinmatthewfox" type="hw02">
+		<param name="theta" value="$(arg theta_param)" type="double" />
+		<param name="speed" value="$(arg speed_param)" type="double" />
+		<param name="rate" value="$(arg rate_param)" type="double" />
+	</node>
+
+	<node name="my_rosbag_recorder" pkg="rosbag" type="record" args="-a -o /home/ece446/workspaces/hw02/rosbag_records/" output="screen">
+	</node>
+</launch>

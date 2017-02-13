@@ -1,0 +1,25 @@
+<launch>
+  	<include file="$(find catvehicle)/launch/catvehicle_skidpan.launch" />	
+
+	<arg name="theta_param" value="2" />
+	<arg name="speed_param" value="5" />
+	<arg name="rate_param" value="12" />
+	
+	<node name="my_odom2pose" pkg="odom2pose" type="odom2pose.py">
+	</node>
+
+	<node name="my_main_node" pkg="hw02kevinmatthewfox" type="hw02">
+		<param name="theta" value="$(arg theta_param)" type="double" />
+		<param name="speed" value="$(arg speed_param)" type="double" />
+		<param name="rate" value="$(arg rate_param)" type="double" />
+		<remap from="turtle1/cmdvel" to="catvehicle/cmd_vel" />
+		<!--
+		<remap from="turtle1/pose" to="catvehicle/odom" />
+		-->
+	</node>
+
+<!--
+	<node name="my_rosbag_recorder" pkg="rosbag" type="record" args="-a -o /home/ece446/workspaces/hw02/src/hw02kevinmatthewfox/rosbag_records/" output="screen">
+	</node>
+-->
+</launch>
